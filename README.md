@@ -1,6 +1,6 @@
 # HoneyComb
 ## Memebers:
-#### Vidu(Leader)
+#### Vudu(Leader)
 #### Jombie
 #### Preet
 #### Suv
