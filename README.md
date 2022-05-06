@@ -2,5 +2,5 @@
 ## Memebers:
 #### Vidu(Leader)
 #### Jombie
-#### Prittek
+#### Preet
 #### Suv
