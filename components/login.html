@@ -25,11 +25,11 @@
           <div class="sign-in" id="sign-in-info">
             <h1>Sign In</h1>
             <p class="small">Use your email account:</p>
-            <form id="sign-in-form">
-              <input type="email" placeholder="Email"/>
-              <input type="password" placeholder="Password"/>
+            <form id="sign-in-form" method="POST">
+              <input type="email" placeholder="Email" name="'email"  id="email"/>
+              <input type="password" placeholder="Password" name="password1"/ id ="password1">
               <p class="forgot-password">Forgot your password?</p>
-              <button class="control-button in">Sign In</button>
+              <button class="control-button in" type="submit">Sign In</button>
             </form>
           </div>
           <div class="sign-up" id="sign-up-info">
