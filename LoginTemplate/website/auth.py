@@ -91,6 +91,7 @@ def login():
             else:
                 flash('Email doesn\'t exist ', category='error')
             return render_template("login.html",user=current_user)
+
         elif request.form["submitbutton"]=="signup":
             print(request.form)
             email = request.form.get('email')
