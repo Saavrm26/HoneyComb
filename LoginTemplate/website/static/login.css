@@ -1,12 +1,18 @@
+body
+{
+  background: rgb(110,133,178);
+  background: linear-gradient(90deg, rgb(133, 150, 184) 0%, rgb(224, 217, 231) 59%);
+}
 :root{
     --form-height:550px;
     --form-width: 900px;
     /*  Sea Green */
-    --right-color: #69C1CF;
+    --right-color: #261C2C;
     /*  Light Blue  */
-    --left-color: #66addc;
+    --left-color: #261C2C;
   }
   .container{
+    background-color:aliceblue ;
     width: var(--form-width);
     height: var(--form-height);
     position: relative;
@@ -26,8 +32,8 @@
     position: absolute;
     z-index: 100;
     /* background-image: linear-gradient(to right, var(--left-color), var(--right-color)); */
-    background-color: #0093E9;
-    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    background: rgb(38,28,44);
+    background: linear-gradient(160deg, rgba(38,28,44,1) 0%, rgba(62,44,65,1) 50%, rgba(92,82,127,1) 100%);
 
     border-radius: 10px;
     color: white;
@@ -109,6 +115,8 @@
 
   .switch-button{
     border: 2px solid;
+    background: aliceblue;
+    color: #5C527F;
   }
 
   .control-button{
@@ -127,7 +135,10 @@
   .control-button.in{
     background-color: var(--right-color);
   }
-
+  .head-1{
+  font-size:35px;
+  font-weight:800;
+}
   /*
   --------------------------
         Forms
