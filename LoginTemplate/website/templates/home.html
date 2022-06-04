@@ -1,61 +1,13 @@
-{% extends "base.html" %}
-{% block title %}Home{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div><span class="le naam">{{ mail }}</span></div>
+</body>
 
-{% block content %}
-
-
-    <div class="container">
-      <div class="col-sm-8">
-        <div class="no_message">
-          <h1 style='color: #ccc'>No message yet..</h1>
-          <div class="message_holder"></div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <form action="" method="POST">
-          <b>Type your message below <span class="glyphicon glyphicon-arrow-down"></span></b>
-          <div class="clearfix" style="margin-top: 5px;"></div>
-          <input type="text" class="username form-control" placeholder="User Name">
-          <div style="padding-top: 5px;"></div>
-          <input type="text" class="message form-control" placeholder="Messages">
-          <div style="padding-top: 5px;"></div>
-          <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-send"></span> Send</button>
-        </form>
-      </div>
-    </div>
-
-    {% if f==True %}
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script>
-        var socket = io.connect( 'http://' + document.domain + ':' + location.port )
-        // broadcast a message
-        socket.on( 'connect', function() {
-          socket.emit( 'my event', {
-            data: 'User Connected'
-          } )
-          var form = $( 'form' ).on( 'submit', function( e ) {
-            e.preventDefault()
-            let user_name = $( 'input.username' ).val()
-            let user_input = $( 'input.message' ).val()
-            socket.emit( 'my event', {
-              user_name : user_name,
-              message : user_input
-            } )
-            // empty the input field
-            $( 'input.message' ).val( '' ).focus()
-          } )
-        } )
-
-        // capture message
-        socket.on( 'my response', function( msg ) {
-          console.log( msg )
-          if( typeof msg.user_name !== 'undefined' ) {
-            $( 'h1' ).remove()
-            $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
-          }
-        } )
-      </script>
-    {% endif %}
-{% endblock %}
+</html>
