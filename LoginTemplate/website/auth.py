@@ -76,6 +76,7 @@ def login():
         if request.form["submitbutton"]=="sign-in":
             data=request.form
             print(data)
+            global email
             email = request.form.get('email')
             print(email)
             password = request.form.get('password1')

@@ -16,6 +16,7 @@ def home():
 
 @socketio.on( 'my event' )
 def handle_my_custom_event(json):
+    print("here")
     print( 'recived my event: ' + str( json ) )
     socketio.emit( 'my response', json, callback=messageRecived )
 def messageRecived():
