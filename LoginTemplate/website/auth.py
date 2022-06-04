@@ -69,7 +69,7 @@ auth = Blueprint('auth', __name__)
 
 #     return render_template("sign_up.html",user= current_user)
 
-@auth.route('/login',methods=['GET', 'POST'])
+@auth.route('/',methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         # print(request.form)
