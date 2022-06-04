@@ -4,20 +4,16 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import Note
 from . import db
 from . import socketio
+
 # import json
 views = Blueprint('views', __name__)
 
 
-
-@views.route('/home', methods=['GET', 'POST'])
+@views.route('/<email>', methods=['GET', 'POST'])
 @login_required
-def home():
-    return render_template( 'home.html' )
+def home(email):
+    if email == '':
+        email='undefined'
+    print("chutiya")
+    return render_template( 'home.html' , mail = email )
 
-@socketio.on( 'my event' )
-def handle_my_custom_event(json):
-    print("here")
-    print( 'recived my event: ' + str( json ) )
-    socketio.emit( 'my response', json, callback=messageRecived )
-def messageRecived():
-    print( 'message was received!!!' )
