@@ -5,7 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
-
 auth = Blueprint('auth', __name__)
 
 # @auth.route('/login', methods=['GET', 'POST'])
@@ -68,24 +67,23 @@ auth = Blueprint('auth', __name__)
 #             return redirect(url_for('views.home'))
 
 #     return render_template("sign_up.html",user= current_user)
-
+email=''
 @auth.route('/',methods=['GET', 'POST'])
 def login():
+    global email
+    print(id(email))
     if request.method == 'POST':
-        # print(request.form)
+        print(request.form)
         if request.form["submitbutton"]=="sign-in":
             data=request.form
-            print(data)
-            email = request.form.get('email')
-            print(email)
+            username = request.form.get('username')
             password = request.form.get('password1')
-            print(password)
             user = User.query.filter_by(email=email).first()
             if user:
                 if check_password_hash(user.password, password):
                     flash('Logged in Successfully', category= 'success')
                     login_user(user, remember=True)
-                    return redirect(url_for('views.home'))
+                    return redirect(url_for('views.home',uname=username))
                 else:
                     flash('Incorrect password, try again', category='error')
             else:
@@ -95,17 +93,11 @@ def login():
         elif request.form["submitbutton"]=="signup":
             print(request.form)
             username = request.form.get('username')
-            print(username)
             email = request.form.get('email')
-            print(email)
             year = request.form.get('year')
-            print(year)
             first_name = request.form.get('firstName')
-            print(first_name)
             password1 = request.form.get('password1')
-            print(password1)
             password2 = request.form.get('password2')
-            print(password2)
             user = User.query.filter_by(email=email).first()
             if user:
                 flash('Email already exists', category='error')
@@ -123,7 +115,7 @@ def login():
                 db.session.commit()
                 flash('Account created successfully!', category='success')
                 login_user(new_user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.home',uname=username))
             return render_template("login.html",user= current_user)
         else:
             return render_template("login.html",user= current_user)
