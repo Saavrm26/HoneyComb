@@ -7,7 +7,7 @@ from flask_socketio import SocketIO, emit
 from sqlalchemy import null
 db = SQLAlchemy()
 DB_NAME = "datebase.db"
-socketio = SocketIO()
+
 def create_app():
     app= Flask(__name__)
     app.config['SECRET_KEY'] = 'kjnfvisduhnf'
@@ -32,8 +32,6 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
-    socketio.init_app(app)
-    # socketio = SocketIO( app )
 
 
     return app
