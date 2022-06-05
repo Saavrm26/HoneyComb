@@ -12,7 +12,9 @@ class Note(db.Model):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True)
     email = db.Column(db.String(150), unique=True)
+    year = db.Column(db.Integer)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
