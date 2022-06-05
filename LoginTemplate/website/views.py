@@ -9,11 +9,10 @@ from . import socketio
 views = Blueprint('views', __name__)
 
 
-@views.route('/<email>', methods=['GET', 'POST'])
+@views.route('/<uname>', methods=['GET', 'POST'])
 @login_required
-def home(email):
-    if email == '':
-        email='undefined'
-    print("chutiya")
-    return render_template( 'home.html' , mail = email )
+def home(uname):
+    if uname == '':
+        uname='undefined'
+    return render_template( 'home.html' , uname = uname )
 
