@@ -3,7 +3,6 @@ import flask_sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-from flask_socketio import SocketIO, emit
 from sqlalchemy import null
 db = SQLAlchemy()
 DB_NAME = "datebase.db"

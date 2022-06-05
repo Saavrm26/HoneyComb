@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import Note
 from . import db
-from . import socketio
+
 
 # import json
 views = Blueprint('views', __name__)
