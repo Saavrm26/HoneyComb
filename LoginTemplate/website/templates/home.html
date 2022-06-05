@@ -1,15 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div><span id="le-naam">{{ uname }}</span></div>
-</body>
-  <script>
-    console.log(Document.getElementById('le-naam'));
-  </script>
+  <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Koulen&family=Lobster&family=Macondo&family=Smooch&family=Source+Code+Pro&display=swap');
+
+      *{
+          list-style: none;
+          text-decoration: none;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Source Code Pro', cursive;
+      }
+
+      #message-form{
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(69 114 186);;
+}
+
+.message-form button{
+    height: 100%;
+    /* width: 100%; */
+    /* border: 1px solid #444;
+    outline: none;
+    background: #222; */
+    color: rgb(85, 85, 85);
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .message-form button:hover{
+    background: #3a3a3a;
+    color: rgb(202, 202, 202);
+  }
+
+
+      .news{
+        width: 80vw;
+        margin: 10px;
+        padding: 10px;
+        margin-left: 100px;
+        background-color: aquamarine;
+      }
+
+      .profile p{
+          font-family: 'Lobster', cursive;
+      }
+
+      body{
+          background: #f5f6fa;
+      }
+
+      .wrapper .sidebar{
+          /* background-color: #0093E9; */
+          background-image: linear-gradient(160deg, #261C2C 0%, #5C527F 100%);
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 225px;
+          height: 100%;
+          padding: 20px 0;
+          transition: all 0.5s ease;
+      }
+      .wrapper .sidebar .profile{
+          margin-bottom: 30px;
+          text-align: center;
+      }
+
+      .wrapper .sidebar .profile img{
+          display: block;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          margin: 0 auto;
+      }
+      .wrapper .sidebar .profile h3{
+
+          color: #ffffff;
+          margin: 10px 0 5px;
+      }
+
+      .wrapper .sidebar .profile p{
+          color: rgb(206, 240, 253);
+          font-size: 14px;
+      }
+      .wrapper .sidebar ul li a{
+          display: block;
+          padding: 13px 30px;
+          border-bottom: 0.5px solid aliceblue;
+          color: rgb(241, 237, 237);
+          font-size: 13.4px;
+          position: relative;
+      }
+
+      .wrapper .sidebar ul li a .icon{
+          color: #dee4ec;
+          width: 30px;
+          display: inline-block;
+      }
+      .wrapper .sidebar ul li a:hover,
+      .wrapper .sidebar ul li a.active{
+          color: black;
+          font-weight: bold;
+
+          background: #726A95;
+          border-right: 2px solid #94aabd;
+      }
+
+      .wrapper .sidebar ul li a:hover .icon,
+      .wrapper .sidebar ul li a.active .icon{
+          color: #222831;
+      }
+
+      .container{
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          /* background-color: black; */
+          width: 83.5vw;
+          height: 92.5vh;
+      }
+
+      .wrapper .sidebar ul li a:hover:before,
+      .wrapper .sidebar ul li a.active:before{
+          display: block;
+      }
+      .wrapper .section{
+          width: calc(100% - 225px);
+          margin-left: 225px;
+          transition: all 0.5s ease;
+      }
+
+      .wrapper .section .top_navbar{
+          background: #3E2C41;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          padding: 0 30px;
+
+      }
+
+      .wrapper .section .top_navbar .hamburger a{
+          font-size: 20px;
+          color: #f4fbff;
+      }
+
+      .wrapper .section .top_navbar .hamburger a:hover{
+          color: #C996CC      ;
+      }
+      body.active .wrapper .sidebar{
+          left: -225px;
+      }
+
+      body.active .wrapper .section{
+          margin-left: 0;
+          width: 100%;
+      }
+      .prof-name
+      {
+          font-weight: 500;
+      }
+
+      .sidebar{
+          width: 50px;
+      }
+
+    </style>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+
+    <title>Document</title>
+    <script type="text/javascript">
+      function noenter() {
+        return !(window.event && window.event.keyCode == 13); }
+    </script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!--Top menu -->
+      <div class="section">
+        <div class="top_navbar">
+          <div class="hamburger">
+            <a href="#">
+              <i class="fas fa-bars"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <!--profile image & text-->
+        <div class="profile">
+          <img
+            src="https://cdn.myanimelist.net/r/360x360/images/characters/10/114399.jpg?s=8ce8a5b8f0c3062341114767a546f7c8"
+            alt="profile_picture"
+          />
+          <h3 class="prof-name">{{ uname }}</h3>
+          <p>Designer</p>
+        </div>
+        <!--menu item-->
+        <ul class="sidee">
+          <li>
+            <a href="#" class="active">
+              <span class="icon"><i class="fas fa-desktop"></i></span>
+              <span class="item">NewsFeed</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" id="crotonia-bar">
+              <span class="icon"><i class="fas fa-user-friends"></i></span>
+              <span class="item">Crotonia</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+              <span class="item">Perfomance</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="icon"><i class="fas fa-database"></i></span>
+              <span class="item">Development</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="icon"><i class="fas fa-chart-line"></i></span>
+              <span class="item">Reports</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="icon"><i class="fas fa-user-shield"></i></span>
+              <span class="item">Admin</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">  
+              <span class="icon"><i class="fas fa-cog"></i></span>
+              <span class="item">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="containner" class="container">
+      <div id="chat">
+        <ul id="messages"></ul>
+        <form id="message-form" onkeypress="noenter()">
+          <input id="message-input" type="text" />
+          <button id="message-btn" type="submit">Send</button>
+          <button>  
+        </form>
+        <input id="image" type="file"/>
+        <button id="image-btn" type="submit">Send2</button>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+// import { getStorage } from 'https://www.gstatic.com/firebasejs/5.9.1/firebase-storage.js';
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAeaHc0agHVEGNC24xd8CnZWxD-IibrE7U",
+  authDomain: "honeycomb2.firebaseapp.com",
+  databaseURL: "https://honeycomb2-default-rtdb.firebaseio.com",
+  projectId: "honeycomb2",
+  storageBucket: "honeycomb2.appspot.com",
+  messagingSenderId: "129839087943",
+  appId: "1:129839087943:web:7f70c218de4682ed148c62",
+};
+
+// Initialize Firebase
+//   const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig).getStorage();
+
+const username = document.getElementsByClassName("prof-name")[0].innerText;
+
+
+document.getElementById("crotonia-bar").addEventListener("click", function (e){
+  document.getElementsByClassName("active")[0].classList.remove("active");
+  document.getElementById("crotonia-bar").classList.add("active");
+  document.getElementById("messages").remove();
+
+  
+  document.getElementById("message-form").addEventListener("submit", sendMessage);
+
+  function sendMessage(e) {
+    e.preventDefault();
+  
+    // get values to be submitted
+    const timestamp = Date.now();
+    const messageInput = document.getElementById("message-input");
+    const message = messageInput.value;
+  
+    // clear the input box
+    messageInput.value = "";
+  
+    //auto scroll to bottom
+    document
+      .getElementById("messages")
+      .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  
+    // create db collection and send in the data
+    firebase.database().ref("crotonia/" + timestamp).set({
+      username,
+      message,
+    });
+  }
+
+  const fetchChat = firebase.database().ref("crotonia/");
+
+  fetchChat.on("child_added", function (snapshot) {
+    const messages = snapshot.val();
+    const message = `<li class=${
+      username === messages.username ? "sent" : "receive"
+    }><span>${messages.username}: </span>${messages.message}</li>`;
+    // append the message on the page
+    document.getElementById("messages").innerHTML += message;
+  });
+
+
+})
+
+
+if(document.getElementsByClassName("active")[0].innerText==" NewsFeed"){
+  // console.log(document.getElementsByClassName("active")[0].innerText);
+  // if(document.getElementsByClassName("active")[0].innerText===" NewsFeed") console.log(1);
+document
+  .getElementById("message-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    console.log(document.querySelector("#image").files.length);
+    
+    if(document.querySelector("#image").files.length==0){
+
+    const timestamp = Date.now();
+    const messageInput = document.getElementById("message-input");
+    const message = messageInput.value;
+
+    messageInput.value = "";
+
+    // document
+    //   .getElementById("messages")
+    //   .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
+    window.scrollBy(0, 100);
+    var flag = 0;
+    // pageScroll();
+    // create db collection and send in the data
+    firebase
+      .database()
+      .ref("messages/" + timestamp)
+      .set({
+        username,
+        message,
+        flag,
+      });
+    }
+    
+
+  });
+
+// document.getElementById("message-form").addEventListener("keypress", )
+const ref = firebase.storage().ref();
+document.getElementById("image-btn").addEventListener("click", function (e) {
+  e.preventDefault();
+  const file = document.querySelector("#image").files[0];
+  const name = +new Date() + "-" + file.name;
+  const metadata = { contentType: file.type };
+  const task = ref.child(name).put(file, metadata);
+  // task
+  //   .then((snapshot) => snapshot.ref.getDownloadURL())
+  //   .then((url) => console.log(url));
+  const timestamp = Date.now();
+  task
+    .then((snapshot) => snapshot.ref.getDownloadURL())
+    .then((url) => {
+      var flag = 1;
+      firebase
+        .database()
+        .ref("messages/" + timestamp)
+        .set({
+          username,
+          url,
+          flag,
+        });
+    });
+});
+
+// function pageScroll() {
+//   window.scrollBy(0,1);
+//   scrolldelay = setTimeout(pageScroll,10);
+// }
+
+firebase
+  .database()
+  .ref("messages/")
+  .on("child_added", function (snapshot) {
+    const snap = snapshot.val();
+    if (snap.flag == 0) {
+      const message = `<li class="news"><span><i>${
+        username == snap.username ? "You" : snap.username
+      }: </i></span>${snap.message}</li>`;
+      document.getElementById("messages").innerHTML += message;
+    } else {
+      const message = `<li class="news"><span><i>${
+        username == snap.username ? "You" : snap.username
+      }: </i></span><img src="${snap.url}"></img></li>`;
+      document.getElementById("messages").innerHTML += message;
+    }
+  });
+}
+
+// firebase
+//   .database()
+//   .ref("images/")
+//   .on("child_added", function (snapshot) {
+//     const messages = snapshot.val();
+//     const message = `<li class="news"><span><i>${
+//       username == messages.username ? "You" : messages.username
+//     }: </i></span><img src="${messages.url}"></img></li>`;
+//     document.getElementById("messages").innerHTML += message;
+//   });
+
+    </script>
+  </body>
 </html>
