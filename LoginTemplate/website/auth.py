@@ -81,7 +81,7 @@ def login():
             user = User.query.filter_by(username=username).first()
             if user:
                 if check_password_hash(user.password, password):
-                    flash('Logged in Successfully', category= 'success')
+                    flash('', category= 'success')
                     login_user(user, remember=True)
                     return redirect(url_for('views.home',uname=username))
                 else:
@@ -113,7 +113,7 @@ def login():
                 new_user = User(email=email,username=username,year=year, first_name=first_name, password=generate_password_hash(password1, method='sha256'))
                 db.session.add(new_user)
                 db.session.commit()
-                flash('Account created successfully!', category='success')
+                flash('', category='success')
                 login_user(new_user, remember=True)
                 return redirect(url_for('views.home',uname=username))
             return render_template("login.html",user= current_user)
