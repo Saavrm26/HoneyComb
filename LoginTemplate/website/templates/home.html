@@ -19,6 +19,35 @@
           font-family: 'Source Code Pro', cursive;
       }
 
+      #message-form{
+
+        background-color:rgb(85, 85, 85);
+
+      }
+
+      #message-input{
+        background-color: gray;
+        width: 50vwpx;
+        height: 20px;
+        margin-left: 300px;
+      }
+
+      #image{
+          /* display: none; */
+
+      }
+
+  label[for="file-input"] {
+    padding: 1em 1.5em;
+    flex: 1 1 auto;
+    text-align: center;
+    color: #FFF;
+    background-color: #1894AC;
+    box-shadow: 1px 0 10px rgba(0,0,0,.15);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
       /* .sent {
     text-align: right;
     background-color: #ff6a76;
@@ -29,6 +58,16 @@
     margin-left: 5px;
     color: #6929ca;
 } */
+
+.image i.remove{
+  vertical-align:middle;
+  margin-left: 5px;
+  cursor:pointer;
+  display:none;
+}
+.image{
+  display: none;
+}
 
 .messages {
 	  display: flex;
@@ -207,6 +246,12 @@
           width: 50px;
       }
 
+      #top{
+          font-weight: 700;
+          color:white;
+          margin-left: 300px;
+      }
+
     </style>
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -236,6 +281,7 @@
               <i class="fas fa-bars"></i>
             </a>
           </div>
+          <h3 id="top">Be Sweet Like Honey</h3>
         </div>
       </div>
       <div class="sidebar">
@@ -350,6 +396,11 @@
         </form>
         <span>
         <input id="image" type="file">
+        <label for="image">
+          <i class="fa fa-paperclip fa-2x"></i>
+          <span></span>
+        </label>
+        <!-- <i class="fa fa-times-circle remove"></i> -->
         <button id="image-btn" type="submit">Send2</button></span>
       </div>
     </div>
