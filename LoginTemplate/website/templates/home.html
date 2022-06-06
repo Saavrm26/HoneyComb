@@ -19,16 +19,39 @@
           font-family: 'Source Code Pro', cursive;
       }
 
-      #message-form{
+      /* .sent {
+    text-align: right;
+    background-color: #ff6a76;
+    margin-left: 50%;
+}
+
+.sent span {
+    margin-left: 5px;
+    color: #6929ca;
+} */
+
+.messages {
+	  display: flex;
+	  flex-direction: column;
+	  overflow: scroll;
+	  height: 90%;
+	  width: 100%;
+	  background-color: white;
+	  padding: 15px;
+	  margin: 15px;
+	  border-radius: 10px;
+  }
+
+      /* #message-form{
     text-align: center;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     background-color: rgb(69 114 186);;
-}
+} */
 
-.message-form button{
+#message-form button{
     height: 100%;
     /* width: 100%; */
     /* border: 1px solid #444;
@@ -41,18 +64,25 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  .message-form button:hover{
+  #message-form button:hover{
     background: #3a3a3a;
     color: rgb(202, 202, 202);
   }
 
 
       .news{
-        width: 80vw;
+        width: 50vw;
+        /* height: 500px; */
         margin: 10px;
         padding: 10px;
-        margin-left: 100px;
-        background-color: aquamarine;
+        margin-left: 200px;
+        /* background-color: aquamarine; */
+        border-radius: 10px;
+      }
+      .news img{
+        height: 500px;
+        border: 5px solid black;
+        box-shadow: 5px 10px 30px gray;
       }
 
       .profile p{
@@ -318,8 +348,9 @@
           <button id="message-btn" type="submit">Send</button>
           <button>
         </form>
-        <input id="image" type="file"/>
-        <button id="image-btn" type="submit">Send2</button>
+        <span>
+        <input id="image" type="file">
+        <button id="image-btn" type="submit">Send2</button></span>
       </div>
     </div>
 
@@ -352,9 +383,9 @@ const username = document.getElementsByClassName("prof-name")[0].innerText;
 document.getElementById("crotonia-bar").addEventListener("click", function (e){
   document.getElementsByClassName("active")[0].classList.remove("active");
   document.getElementById("crotonia-bar").classList.add("active");
-  document.getElementById("messages").remove();
-
-
+  console.log(document.getElementById("messages").innerText);
+  document.getElementById("messages").innerText = "";
+  
   document.getElementById("message-form").addEventListener("submit", sendMessage);
 
   function sendMessage(e) {
@@ -369,10 +400,10 @@ document.getElementById("crotonia-bar").addEventListener("click", function (e){
     messageInput.value = "";
 
     //auto scroll to bottom
-    document
-      .getElementById("messages")
-      .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-
+    // document
+    //   .getElementById("messages")
+    //   .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  
     // create db collection and send in the data
     firebase.database().ref("crotonia/" + timestamp).set({
       username,
@@ -413,9 +444,9 @@ document
 
     messageInput.value = "";
 
-    // document
-    //   .getElementById("messages")
-    //   .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    document
+      .getElementById("messages")
+      .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 
     window.scrollBy(0, 100);
     var flag = 0;
