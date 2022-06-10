@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='favicon.ico') }}">
     <script src="https://kit.fontawesome.com/9ec67280ec.js" crossorigin="anonymous"></script>
     <link href='https://css.gg/dribbble.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -287,7 +288,7 @@
       <div class="sidebar">
         <!--profile image & text-->
         <div class="profile">
-          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4QC8RXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABgAAAAAQAAAGAAAAABAAAABgAAkAcABAAAADAyMTABkQcABAAAAAECAwAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAkAAQAAADgAAAADoAkAAQAAADgAAAAAAAAA/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAOAA4AwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/OyiiivQPVCijpUxsLr7D9u+zTfYvN8j7SIm8rzNu7Zvxt3Y525zjnpQBDRRRQAUUUUAFFFFAG14S0O013VHXUbuSy0y1he6upYE3zGJBysYPG9iQq7sKC2SQAa6AfFi5N99mOnxf8If5X2X/hGfNP2fyM7s78Z8/Pz/AGjG/dz935KxPB/TX+cf8Sqbn/gSVJ/wkk48bLq3/CP6Z9oWQD+x/sf+iFgmzaYsn6kf3uaBdWVvF2iWmh6sqafdyXum3MKXVrLNH5cvluOFkXoHUgqdvykrkcEVi10Hi4YTQf8AsFQ8nn+J65+gFsFFFFAwooooA2vCOuWmhasz6jaPe6Zcwva3UUEmyYROOWjJ43qQGXcCpK4IIJx3f/CH3Pm/av8AQv7CFpu/4TjbL5ZtP9X/AKnO37Vj935WfM3f9/K8q61Mb+6+w/YftU32LzfP+zCVvK8zbt37M7d2ON2M446UrCaNTxdrdprmrK+nWj2WmW0KWtpFNJ5kpjQcPI3QuxJY7flBOBwBWLRRTGFFFFABRRRQAUUUUAFFFFABRRRQB//Z" alt="profilepic" />
+          <img src="{{ url_for('static',filename='HoneyComb.jpg') }}" alt="profilepic" />
           <h3 class="prof-name">{{ uname }}</h3>
         </div>
         <!--menu item-->
@@ -436,7 +437,7 @@ document.getElementById("crotonia-bar").addEventListener("click", function (e){
   document.getElementById("crotonia-bar").classList.add("active");
   console.log(document.getElementById("messages").innerText);
   document.getElementById("messages").innerText = "";
-  
+
   document.getElementById("message-form").addEventListener("submit", sendMessage);
 
   function sendMessage(e) {
@@ -454,7 +455,7 @@ document.getElementById("crotonia-bar").addEventListener("click", function (e){
     // document
     //   .getElementById("messages")
     //   .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-  
+
     // create db collection and send in the data
     firebase.database().ref("crotonia/" + timestamp).set({
       username,
