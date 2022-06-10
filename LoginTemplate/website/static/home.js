@@ -15,7 +15,6 @@ const firebaseConfig = {
 // Initialize Firebase
 //   const app = initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
-// firebase.initializeApp(firebaseConfig).getStorage();
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
 
@@ -24,11 +23,6 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // console.log(document.querySelector("#image").files.length);
-    // console.log(document.getElementById("message-input").value);
-
-    // if(document.getElementById("message-input").value=="") console.log(1);
-    // else console.log(2);
 
     //AGAR ONLY TEXT
     if (
@@ -120,9 +114,8 @@ document
   const name = +new Date() + "-" + file.name;
   const metadata = { contentType: file.type };
   const task = ref.child(name).put(file, metadata);
-  // task
-  //   .then((snapshot) => snapshot.ref.getDownloadURL())
-  //   .then((url) => console.log(url));
+  
+
   const timestamp = Date.now();
   task
     .then((snapshot) => snapshot.ref.getDownloadURL())
@@ -153,9 +146,8 @@ document
   const name = +new Date() + "-" + file.name;
   const metadata = { contentType: file.type };
   const task = ref.child(name).put(file, metadata);
-  // task
-  //   .then((snapshot) => snapshot.ref.getDownloadURL())
-  //   .then((url) => console.log(url));
+ 
+  
   const timestamp = Date.now();
   task
     .then((snapshot) => snapshot.ref.getDownloadURL())
@@ -176,55 +168,28 @@ document
   document.querySelector("#image").value = null;
 
 });
-
-// document.getElementById("message-form").addEventListener("keypress", )
-const ref = firebase.storage().ref();
-document.getElementById("image-btn").addEventListener("click", function (e) {
-  e.preventDefault();
-  // const file = document.querySelector("#image").files[0];
-  // const name = +new Date() + "-" + file.name;
-  // const metadata = { contentType: file.type };
-  // const task = ref.child(name).put(file, metadata);
-  // // task
-  // //   .then((snapshot) => snapshot.ref.getDownloadURL())
-  // //   .then((url) => console.log(url));
-  // const timestamp = Date.now();
-  // task
-  //   .then((snapshot) => snapshot.ref.getDownloadURL())
-  //   .then((url) => {
-  //     var flag = 1;
-  //     firebase
-  //       .database()
-  //       .ref("messages/" + timestamp)
-  //       .set({
-  //         username,
-  //         url,
-  //         flag,
-  //       });
-  //   });
-});
-
-// function pageScroll() {
-//   window.scrollBy(0,1);
-//   scrolldelay = setTimeout(pageScroll,10);
-// }
-
 firebase
   .database()
   .ref("messages/")
   .on("child_added", function (snapshot) {
     const snap = snapshot.val();
+    
+    
     if (snap.flag == 0) {
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
       }: </i></span>${snap.message}</li>`;
       document.getElementById("messages").innerHTML += message;
-    } else if(snap.flag == 1){
+    }
+     
+    
+    else if(snap.flag == 1){
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
       }: </i></span><img src="${snap.url}"></img></li>`;
       document.getElementById("messages").innerHTML += message;
     }
+
 
     else{
       const message = `<li class="news"><p><i>${
@@ -233,14 +198,3 @@ firebase
       document.getElementById("messages").innerHTML += message;
     }
   });
-
-// firebase
-//   .database()
-//   .ref("images/")
-//   .on("child_added", function (snapshot) {
-//     const messages = snapshot.val();
-//     const message = `<li class="news"><span><i>${
-//       username == messages.username ? "You" : messages.username
-//     }: </i></span><img src="${messages.url}"></img></li>`;
-//     document.getElementById("messages").innerHTML += message;
-//   });
