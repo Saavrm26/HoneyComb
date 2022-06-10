@@ -494,24 +494,68 @@ document
     const messageInput = document.getElementById("message-input");
     const message = messageInput.value;
 
-    messageInput.value = "";
+    // using sightengine for moderation
+    //start
 
-    document
-      .getElementById("messages")
-      .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    console.log(message);
+    const d = new FormData();
+    d.append('text', message);
+    d.append('lang', 'en');
+    d.append('opt_countries', 'us,gb,fr');
+    d.append('mode', 'standard');
+    d.append('api_user', '45211228');
+    d.append('api_secret', 'UwQPeDmdHyZBgpaKLUqF');
+    const moderationJSON=fetch('https://api.sightengine.com/1.0/text/check.json',{
+        method:'POST',
+        body: d
+    }).then(function (response) {
+        // on success: handle response
+        console.log("success")
 
-    window.scrollBy(0, 100);
-    var flag = 0;
-    // pageScroll();
-    // create db collection and send in the data
-    firebase
-      .database()
-      .ref("messages/" + timestamp)
-      .set({
-        username,
-        message,
-        flag,
-      });
+        return response.json();
+        }).then(
+            function(moderationJSON) {
+                //console.log(data)
+                console.log(moderationJSON)
+                let shouldSend = true;
+                console.log(moderationJSON.personal)
+                if(moderationJSON.personal.matches.length>0){
+                  shouldSend = false;
+                }
+                console.log(moderationJSON.profanity)
+                if(moderationJSON.profanity.matches.length>0){
+                  shouldSend = false;
+                }
+                  // end
+                messageInput.value = "";
+
+                document
+                  .getElementById("messages")
+                  .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
+                window.scrollBy(0, 100);
+                var flag = 0;
+                // pageScroll();
+                // create db collection and send in the data
+                if(shouldSend==true){
+                  firebase
+                  .database()
+                  .ref("messages/" + timestamp)
+                  .set({
+                    username,
+                    message,
+                    flag,
+                  });
+                }
+            }
+        )
+        .catch(function (error) {
+        // handle error
+        console.log("error")
+        if (error.response) console.log(error.response.data);
+        else console.log(error.message);
+        });
+        // end
     }
 
 
