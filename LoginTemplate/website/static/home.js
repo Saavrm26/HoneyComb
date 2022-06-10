@@ -15,151 +15,107 @@ const firebaseConfig = {
 // Initialize Firebase
 //   const app = initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
-// firebase.initializeApp(firebaseConfig).getStorage();
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
 
-
-document.getElementById("crotonia-bar").addEventListener("click", function (e){
-  document.getElementsByClassName("active")[0].classList.remove("active");
-  document.getElementById("crotonia-bar").classList.add("active");
-  console.log(document.getElementById("messages").innerText);
-  document.getElementById("messages").innerText = "";
-
-  document.getElementById("message-form").addEventListener("submit", sendMessage);
-
-  function sendMessage(e) {
-    e.preventDefault();
-
-    // get values to be submitted
-    const timestamp = Date.now();
-    const messageInput = document.getElementById("message-input");
-    const message = messageInput.value;
-
-    // clear the input box
-    messageInput.value = "";
-
-    //auto scroll to bottom
-    // document
-    //   .getElementById("messages")
-    //   .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-
-    // create db collection and send in the data
-    firebase.database().ref("crotonia/" + timestamp).set({
-      username,
-      message,
-    });
-  }
-
-  const fetchChat = firebase.database().ref("crotonia/");
-
-  fetchChat.on("child_added", function (snapshot) {
-    const messages = snapshot.val();
-    const message = `<li class=${
-      username === messages.username ? "sent" : "receive"
-    }><span>${messages.username}: </span>${messages.message}</li>`;
-    // append the message on the page
-    document.getElementById("messages").innerHTML += message;
-  });
-
-
-})
-
-
-if(document.getElementsByClassName("active")[0].innerText==" NewsFeed"){
-  // console.log(document.getElementsByClassName("active")[0].innerText);
-  // if(document.getElementsByClassName("active")[0].innerText===" NewsFeed") console.log(1);
 document
   .getElementById("message-form")
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    console.log(document.querySelector("#image").files.length);
 
-    if(document.querySelector("#image").files.length==0){
+    //AGAR ONLY TEXT
+    if (
+      document.querySelector("#image").files.length == 0 &&
+      document.getElementById("message-input").value != ""
+    ) {
 
-    const timestamp = Date.now();
-    const messageInput = document.getElementById("message-input");
-    const message = messageInput.value;
+      console.log("ONLY TEXT");
 
-    // using sightengine for moderation
-    //start
+      const timestamp = Date.now();
+      const messageInput = document.getElementById("message-input");
 
-    console.log(message);
-    const d = new FormData();
-    d.append('text', message);
-    d.append('lang', 'en');
-    d.append('opt_countries', 'us,gb,fr');
-    d.append('mode', 'standard');
-    d.append('api_user', '45211228');
-    d.append('api_secret', 'UwQPeDmdHyZBgpaKLUqF');
-    const moderationJSON=fetch('https://api.sightengine.com/1.0/text/check.json',{
-        method:'POST',
-        body: d
-    }).then(function (response) {
-        // on success: handle response
-        console.log("success")
+      const message = messageInput.value;
 
-        return response.json();
-        }).then(
-            function(moderationJSON) {
-                //console.log(data)
-                console.log(moderationJSON)
-                let shouldSend = true;
-                console.log(moderationJSON.personal)
-                if(moderationJSON.personal.matches.length>0){
-                  shouldSend = false;
-                }
-                console.log(moderationJSON.profanity)
-                if(moderationJSON.profanity.matches.length>0){
-                  shouldSend = false;
-                }
-                  // end
-                messageInput.value = "";
+      // using sightengine for moderation
+      //start
 
-                document
-                  .getElementById("messages")
-                  .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+      console.log(message);
+      const d = new FormData();
+      d.append("text", message);
+      d.append("lang", "en");
+      d.append("opt_countries", "us,gb,fr");
+      d.append("mode", "standard");
+      d.append("api_user", "45211228");
+      d.append("api_secret", "UwQPeDmdHyZBgpaKLUqF");
+      const moderationJSON = fetch(
+        "https://api.sightengine.com/1.0/text/check.json",
+        {
+          method: "POST",
+          body: d,
+        }
+      )
+        .then(function (response) {
+          // on success: handle response
+          console.log("success");
 
-                window.scrollBy(0, 100);
-                var flag = 0;
-                // pageScroll();
-                // create db collection and send in the data
-                if(shouldSend==true){
-                  firebase
-                  .database()
-                  .ref("messages/" + timestamp)
-                  .set({
-                    username,
-                    message,
-                    flag,
-                  });
-                }
-            }
-        )
+          return response.json();
+        })
+        .then(function (moderationJSON) {
+          //console.log(data)
+          console.log(moderationJSON);
+          let shouldSend = true;
+          console.log(moderationJSON.personal);
+          if (moderationJSON.personal.matches.length > 0) {
+            shouldSend = false;
+          }
+          console.log(moderationJSON.profanity);
+          if (moderationJSON.profanity.matches.length > 0) {
+            shouldSend = false;
+          }
+          // end
+          messageInput.value = "";
+
+          document.getElementById("messages").scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+          });
+
+          window.scrollBy(0, 100);
+          var flag = 0;
+          // pageScroll();
+          // create db collection and send in the data
+          if (shouldSend == true) {
+            firebase
+              .database()
+              .ref("messages/" + timestamp)
+              .set({
+                username,
+                message,
+                flag,
+              });
+          }
+        })
         .catch(function (error) {
-        // handle error
-        console.log("error")
-        if (error.response) console.log(error.response.data);
-        else console.log(error.message);
+          // handle error
+          console.log("error");
+          if (error.response) console.log(error.response.data);
+          else console.log(error.message);
         });
-        // end
-    }
-
-
-  });
-
-// document.getElementById("message-form").addEventListener("keypress", )
-const ref = firebase.storage().ref();
-document.getElementById("image-btn").addEventListener("click", function (e) {
-  e.preventDefault();
-  const file = document.querySelector("#image").files[0];
+      // end
+  }
+  //Agar only image
+  else if(document.querySelector("#image").files.length != 0 &&
+  document.getElementById("message-input").value == ""){
+    
+    console.log("ONLY IMAGE");
+    const file = document.querySelector("#image").files[0];
   const name = +new Date() + "-" + file.name;
   const metadata = { contentType: file.type };
   const task = ref.child(name).put(file, metadata);
-  // task
-  //   .then((snapshot) => snapshot.ref.getDownloadURL())
-  //   .then((url) => console.log(url));
+  
+
   const timestamp = Date.now();
   task
     .then((snapshot) => snapshot.ref.getDownloadURL())
@@ -174,41 +130,71 @@ document.getElementById("image-btn").addEventListener("click", function (e) {
           flag,
         });
     });
+
+  }
+
+  else{
+    console.log("BOTH IMAGE AND TEXT");
+
+
+    const messageInput = document.getElementById("message-input");
+      const message = messageInput.value;
+
+      messageInput.value = "";
+
+    const file = document.querySelector("#image").files[0];
+  const name = +new Date() + "-" + file.name;
+  const metadata = { contentType: file.type };
+  const task = ref.child(name).put(file, metadata);
+ 
+  
+  const timestamp = Date.now();
+  task
+    .then((snapshot) => snapshot.ref.getDownloadURL())
+    .then((url) => {
+      var flag = 2;
+      firebase
+        .database()
+        .ref("messages/" + timestamp)
+        .set({
+          username,
+          url,
+          message,
+          flag,
+        });
+    });
+
+  }
+  document.querySelector("#image").value = null;
+
 });
-
-// function pageScroll() {
-//   window.scrollBy(0,1);
-//   scrolldelay = setTimeout(pageScroll,10);
-// }
-
 firebase
   .database()
   .ref("messages/")
   .on("child_added", function (snapshot) {
     const snap = snapshot.val();
+    
+    
     if (snap.flag == 0) {
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
       }: </i></span>${snap.message}</li>`;
       document.getElementById("messages").innerHTML += message;
-    } else {
+    }
+     
+    
+    else if(snap.flag == 1){
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
       }: </i></span><img src="${snap.url}"></img></li>`;
       document.getElementById("messages").innerHTML += message;
     }
+
+
+    else{
+      const message = `<li class="news"><p><i>${
+        username == snap.username ? "You" : snap.username
+      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+      document.getElementById("messages").innerHTML += message;
+    }
   });
-}
-
-// firebase
-//   .database()
-//   .ref("images/")
-//   .on("child_added", function (snapshot) {
-//     const messages = snapshot.val();
-//     const message = `<li class="news"><span><i>${
-//       username == messages.username ? "You" : messages.username
-//     }: </i></span><img src="${messages.url}"></img></li>`;
-//     document.getElementById("messages").innerHTML += message;
-//   });
-
-    
