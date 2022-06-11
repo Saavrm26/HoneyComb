@@ -465,3 +465,10 @@ body
     }
 
   }
+  .fadeInUp{
+    display: inline-block;
+    margin: 0;
+
+    animation: fadeInUp; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 1.75s; /* don't forget to set a duration! */
+  }

@@ -8,35 +8,39 @@
 
     <title>{% block title %}Home{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 </head>
 
 <body>
     <div class="header">
-    <div><center><h1 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Be as sweet as honey</h1></center></div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-        {% if category =='error' %}
-            <div class="alert-error" role="alert">
+    <div class="fadeInUp">
+        <div class="animate__fadeInUp"><center><h1 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Be as sweet as honey</h1></center></div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            {% if category =='error' %}
+                <div class="alert-error" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% else %}
+            <div class="alert-success" role="alert">
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        {% else %}
-        <div class="alert-success" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            {% endif %}
+            {% endfor %}
         {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+        {% endwith %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
     <div class="waves-div">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
