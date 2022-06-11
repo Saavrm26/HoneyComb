@@ -1,5 +1,5 @@
 from .models import User
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from sqlalchemy import true
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -12,9 +12,7 @@ email=''
 @auth.route('/',methods=['GET', 'POST'])
 def login():
     global email
-    print(id(email))
     if request.method == 'POST':
-        print(request.form)
         if request.form["submitbutton"]=="sign-in":
             data=request.form
             username = request.form.get('username')
@@ -23,7 +21,7 @@ def login():
             if user:
                 if check_password_hash(user.password, password):
                     flash('', category= 'success')
-                    login_user(user, remember=True)
+                    login_user(user, remember=False)
                     return redirect(url_for('views.home',uname=username))
                 else:
                     flash('Incorrect password, try again', category='error')
@@ -32,7 +30,6 @@ def login():
             return render_template("login.html",user=current_user)
 
         elif request.form["submitbutton"]=="signup":
-            print(request.form)
             username = request.form.get('username')
             email = request.form.get('email')
             year = request.form.get('year')
@@ -80,5 +77,6 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    session.clear()
     logout_user()
     return redirect(url_for('auth.login'))
