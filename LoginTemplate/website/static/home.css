@@ -1,12 +1,12 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
       *{
             list-style: none;
             text-decoration: none;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Source Code Pro', cursive;
+            font-family: 'Open Sans', sans-serif;
       }
 
       #message-form{
@@ -22,10 +22,6 @@
         margin-left: 300px;
       }
 
-      #image{
-          /* display: none; */
-
-      }
 
   label[for="file-input"] {
     padding: 1em 1.5em;
@@ -162,6 +158,7 @@
           color: rgb(241, 237, 237);
           font-size: 13.4px;
           position: relative;
+          text-decoration: none;
       }
 
       .wrapper .sidebar ul li a .icon{
@@ -235,7 +232,10 @@
       .sidebar{
           width: 50px;
       }
-
+      ul.sidee
+      {
+          padding-left: 0;
+      }
       #top{
           font-weight: 700;
           color:white;
