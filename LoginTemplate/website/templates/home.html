@@ -52,100 +52,88 @@
         <!--menu item-->
         <ul class="sidee">
           <li>
-            <a href="#" class="active">
+            <a href="#" class="active" id = "NewsFeed">
               <span class="icon"><i class="fa-solid fa-desktop"></i></span>
               <span class="item">NewsFeed</span>
             </a>
           </li>
           <li>
-            <a href="{{ url_for('static',filename='Alumni.html') }}">
+            <a href="#" id="Alumni">
               <span class="icon"><i class="fa-solid fa-people-arrows-left-right"></i></span>
               <span class="item">Alumini</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="icon"><i class="bi bi-eyeglasses"></i></span>
-              <span class="item">Faculty</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+            <a href="#" id="CP_Wing">
               <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                 <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
               </svg></span>
 
-              <span class="item">CP Wing</span>
+              <span class="item">CP_Wing</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="SoftDev">
               <span class="icon"><i class="fa-solid fa-code"></i></span>
-              <span class="item">SoftDev wing</span>
+              <span class="item">SoftDev</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="InfoSec">
               <span class="icon"><i class="fa-brands fa-linux"></i></span>
-              <span class="item">InfoSec Wing</span>
+              <span class="item">InfoSec</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="ML_Wing">
               <span class="icon"><i class="fas fa-cog"></i></span>
-              <span class="item">ML Wing</span>
+              <span class="item">ML_Wing</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="UI_UX">
               <span class="icon"><i class="bi bi-person-bounding-box"></i></span>
-              <span class="item">UI/UX Wing</span>
+              <span class="item">UI_UX</span>
             </a>
           </li>
           <li>
-            <a href="#" id="crotonia-bar">
+            <a href="#" id="Crotonia">
               <span class="icon"><i class="fas fa-pen-fancy"></i></span>
               <span class="item">Crotonia</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="Goonj">
               <span class="icon"><i class="fa-solid fa-masks-theater"></i></span>
               <span class="item">Goonj</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="AfterDark">
               <span class="icon"><i class="fa-solid fa-camera"></i></span>
-              <span class="item">After Dark</span>
+              <span class="item">AfterDark</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="Zephyr">
               <span class="icon"><i class="fa-solid fa-z"></i></span>
-              <span class="item">Zypher</span>
+              <span class="item">Zephyr</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="Estrella">
               <span class="icon"><i class="fas fa-guitar"></i></i></span>
               <span class="item">Estrella</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="Eifer">
               <span class="icon"><i class="gg-dribbble"></i></span>
               <span class="item">Eifer</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="icon"><i class="bi bi-currency-bitcoin"></i></i></span>
-              <span class="item">E-cell</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+            <a href="#" id="Students">
               <span class="icon"><i class="fa-solid fa-people-arrows-left-right"></i></span>
               <span class="item">Students</span>
             </a>
@@ -159,7 +147,7 @@
 
     <div id="containner" class="container">
       <div id="chat">
-        <ul id="messages"></ul>
+        <span id="wapisaao"><ul id="messages"></ul></span>
         <form id="message-form" onkeypress="noenter()">
           <input id="message-input" type="text" />
           <button id="message-btn" type="submit">Send</button>
