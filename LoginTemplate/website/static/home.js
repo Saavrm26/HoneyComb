@@ -3,6 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase
 import { getStorage } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-storage.js";
 // console.log(window)
 const axios = window.axios;
+var isCode =0;
+var pastebinCode="";
 const firebaseConfig = {
   apiKey: "AIzaSyAeaHc0agHVEGNC24xd8CnZWxD-IibrE7U",
   authDomain: "honeycomb2.firebaseapp.com",
@@ -105,19 +107,28 @@ document.getElementById("CP_Wing").addEventListener("click", function (e){
   document.getElementById("messages").remove();
   document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
 
+  console.log("inside cpwing")
   folder = document.getElementsByClassName("active")[0].innerText;
-
   firebase
   .database()
   .ref(`${folder}`)
   .on("child_added", function (snapshot) {
     const snap = snapshot.val();
-
+    console.log(isCode)
     if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
+      if(isCode==0){
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+      else{
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}<iframe src="https://pastebin.com/embed_iframe/${pastebinCode}?theme=dark" style="border:none;width:100%;"></iframe></li>`;
+        document.getElementById("messages").innerHTML += message;
+        isCode=0;
+      }
     } else if (snap.flag == 1) {
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
@@ -429,6 +440,7 @@ document
         .then(function (moderationJSON) {
           console.log(moderationJSON);
           let shouldSend = true;
+
           console.log(moderationJSON.personal);
           if (moderationJSON.personal.matches.length > 0) {
             alert("Don't send personal details");
@@ -451,6 +463,15 @@ document
           window.scrollBy(0, 100);
           var flag = 0;
 
+          if(moderationJSON.link.matches.length>0){
+            let adf=message.includes("https://pastebin.com/");
+            console.log(adf);
+            if(message.includes("https://pastebin.com/")){
+              isCode = 1;
+              pastebinCode=message.substring(21);
+              console.log(pastebinCode);
+            }
+          }
           // create db collection and send in the data
           if (shouldSend == true) {
             firebase
@@ -686,10 +707,13 @@ firebase
     const snap = snapshot.val();
 
     if (snap.flag == 0) {
+
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
       }: </i></span>${snap.message}</li>`;
       document.getElementById("messages").innerHTML += message;
+
+
     } else if (snap.flag == 1) {
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
