@@ -3,8 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase
 import { getStorage } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-storage.js";
 // console.log(window)
 const axios = window.axios;
-var isCode =0;
-var pastebinCode="";
 const firebaseConfig = {
   apiKey: "AIzaSyAeaHc0agHVEGNC24xd8CnZWxD-IibrE7U",
   authDomain: "honeycomb2.firebaseapp.com",
@@ -21,12 +19,10 @@ firebase.initializeApp(firebaseConfig);
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
 
-
 var folder = document.getElementsByClassName("active")[0].innerText;
 console.log(folder);
 
-
-document.getElementById("Alumni").addEventListener("click", function (e){
+document.getElementById("Alumni").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -38,31 +34,31 @@ document.getElementById("Alumni").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-document.getElementById("NewsFeed").addEventListener("click", function (e){
+document.getElementById("NewsFeed").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -74,31 +70,31 @@ document.getElementById("NewsFeed").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-document.getElementById("CP_Wing").addEventListener("click", function (e){
+document.getElementById("CP_Wing").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -107,43 +103,43 @@ document.getElementById("CP_Wing").addEventListener("click", function (e){
   document.getElementById("messages").remove();
   document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
 
-  console.log("inside cpwing")
+  console.log("inside cpwing");
   folder = document.getElementsByClassName("active")[0].innerText;
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
-    console.log(isCode)
-    if (snap.flag == 0) {
-      if(isCode==0){
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
+      if (snap.flag == 0) {
+        if (snap.isCode == 0) {
+          const message = `<li class="news"><span><i>${
+            username == snap.username ? "You" : snap.username
+          }: </i></span>${snap.message}</li>`;
+          document.getElementById("messages").innerHTML += message;
+        } else {
+          console.log("trying to fetch code")
+          let pastebinCode=snap.message.substring(21);
+          console.log(pastebinCode);
+          const message = `<li class="news"><span><i>${
+            username == snap.username ? "You" : snap.username
+          }:</i></span>${snap.message}<iframe src="https://pastebin.com/embed_iframe/${pastebinCode}?theme=dark" style="border:none;width:100%;"></iframe></li>`;
+          document.getElementById("messages").innerHTML += message;
+        }
+      } else if (snap.flag == 1) {
         const message = `<li class="news"><span><i>${
           username == snap.username ? "You" : snap.username
-        }: </i></span>${snap.message}</li>`;
+        }: </i></span><img src="${snap.url}"></img></li>`;
         document.getElementById("messages").innerHTML += message;
-      }
-      else{
-        const message = `<li class="news"><span><i>${
+      } else {
+        const message = `<li class="news"><p><i>${
           username == snap.username ? "You" : snap.username
-        }: </i></span>${snap.message}<iframe src="https://pastebin.com/embed_iframe/${pastebinCode}?theme=dark" style="border:none;width:100%;"></iframe></li>`;
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
         document.getElementById("messages").innerHTML += message;
-        isCode=0;
       }
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+    });
+});
 
-document.getElementById("SoftDev").addEventListener("click", function (e){
+document.getElementById("SoftDev").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -155,31 +151,31 @@ document.getElementById("SoftDev").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-document.getElementById("InfoSec").addEventListener("click", function (e){
+document.getElementById("InfoSec").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -191,31 +187,31 @@ document.getElementById("InfoSec").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-document.getElementById("ML_Wing").addEventListener("click", function (e){
+document.getElementById("ML_Wing").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -227,32 +223,31 @@ document.getElementById("ML_Wing").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-
-document.getElementById("UI_UX").addEventListener("click", function (e){
+document.getElementById("UI_UX").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -264,32 +259,31 @@ document.getElementById("UI_UX").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-
-document.getElementById("Crotonia").addEventListener("click", function (e){
+document.getElementById("Crotonia").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -301,32 +295,31 @@ document.getElementById("Crotonia").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-
-document.getElementById("Goonj").addEventListener("click", function (e){
+document.getElementById("Goonj").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -338,32 +331,31 @@ document.getElementById("Goonj").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
-
-document.getElementById("AfterDark").addEventListener("click", function (e){
+document.getElementById("AfterDark").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
@@ -375,29 +367,29 @@ document.getElementById("AfterDark").addEventListener("click", function (e){
   folder = document.getElementsByClassName("active")[0].innerText;
 
   firebase
-  .database()
-  .ref(`${folder}`)
-  .on("child_added", function (snapshot) {
-    const snap = snapshot.val();
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
 
-    if (snap.flag == 0) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else if (snap.flag == 1) {
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span><img src="${snap.url}"></img></li>`;
-      document.getElementById("messages").innerHTML += message;
-    } else {
-      const message = `<li class="news"><p><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
-      document.getElementById("messages").innerHTML += message;
-    }
-  });
-})
+      if (snap.flag == 0) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class="news"><p><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
 
 document
   .getElementById("message-form")
@@ -462,13 +454,12 @@ document
 
           window.scrollBy(0, 100);
           var flag = 0;
-
-          if(moderationJSON.link.matches.length>0){
-            let adf=message.includes("https://pastebin.com/");
-            console.log(adf);
-            if(message.includes("https://pastebin.com/")){
+          // isCode yaha hai
+          let isCode
+          if (moderationJSON.link.matches.length > 0) {
+            if (message.includes("https://pastebin.com/")) {
               isCode = 1;
-              pastebinCode=message.substring(21);
+              let pastebinCode = message.substring(21);
               console.log(pastebinCode);
             }
           }
@@ -481,6 +472,7 @@ document
                 username,
                 message,
                 flag,
+                isCode
               });
           }
         })
@@ -705,15 +697,23 @@ firebase
   .ref(`${folder}`)
   .on("child_added", function (snapshot) {
     const snap = snapshot.val();
-
+    console.log("fetching messages")
     if (snap.flag == 0) {
-
-      const message = `<li class="news"><span><i>${
-        username == snap.username ? "You" : snap.username
-      }: </i></span>${snap.message}</li>`;
-      document.getElementById("messages").innerHTML += message;
-
-
+      if(snap.isCode==0){
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }: </i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+      else{
+        console.log("trying to fetch code")
+        let pastebinCode=snap.message.substring(21);
+        console.log(pastebinCode);
+        const message = `<li class="news"><span><i>${
+          username == snap.username ? "You" : snap.username
+        }:</i></span>${snap.message}<iframe src="https://pastebin.com/embed_iframe/${pastebinCode}?theme=dark" style="border:none;width:100%;"></iframe></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
     } else if (snap.flag == 1) {
       const message = `<li class="news"><span><i>${
         username == snap.username ? "You" : snap.username
@@ -726,7 +726,7 @@ firebase
       document.getElementById("messages").innerHTML += message;
     }
   });
-  var hamburger = document.querySelector(".hamburger");
-  hamburger.addEventListener("click", function(){
-      document.querySelector("body").classList.toggle("active");
-  })
+var hamburger = document.querySelector(".hamburger");
+hamburger.addEventListener("click", function () {
+  document.querySelector("body").classList.toggle("active");
+});
