@@ -7,7 +7,30 @@ from flask_login import login_user, login_required, logout_user, current_user
 import requests
 import json
 auth = Blueprint('auth', __name__)
-
+def email_validation(email):
+    try:
+        initial=(email[:3]).lower()
+        if initial=='lci' or initial=='lcs' or initial=='lcb' or initial=='lit':
+            year=int(email[3:7])
+            rollno =int(email[7:10])
+            if 2016<=year and year<2019:
+                if initial=='lci' or initial=='lcb':
+                    return False
+                elif rollno>120 or rollno<0:
+                    return False
+            elif 2019<=year and year<=2020:
+                if initial=='lcb':
+                    return False
+                elif rollno<0 and rollno > 80:
+                    return False
+            elif year==2021:
+                if rollno<0 or rollno>60:
+                    return False
+        else:
+            return False
+    except Exception:
+        return False
+    return True
 email=''
 @auth.route('/',methods=['GET', 'POST'])
 def login():
@@ -49,7 +72,9 @@ def login():
             misleading_match=len(output['misleading']['matches'])
             print(output)
             user = User.query.filter_by(username=username).first()
-            if (profanity_match>0) or (misleading_match>0):
+            if not email_validation(email):
+                flash('Invalid email', category='error')
+            elif (profanity_match>0) or (misleading_match>0):
                 flash("Sorry you can't have that username")
             elif user:
                 flash('Email already exists', category='error')
