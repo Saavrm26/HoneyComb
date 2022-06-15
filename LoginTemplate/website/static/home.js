@@ -455,7 +455,7 @@ document
           window.scrollBy(0, 100);
           var flag = 0;
           // isCode yaha hai
-          let isCode
+          let isCode=0;
           if (moderationJSON.link.matches.length > 0) {
             if (message.includes("https://pastebin.com/")) {
               isCode = 1;
