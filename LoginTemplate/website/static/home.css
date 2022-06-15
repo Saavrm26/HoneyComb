@@ -107,10 +107,35 @@
         /* background-color: aquamarine; */
         border-radius: 10px;
       }
-      .news img{
+      .sent img{
         height: 500px;
         border: 5px solid black;
         box-shadow: 5px 10px 30px gray;
+      }
+      .recieved img{
+        height: 500px;
+        border: 5px solid black;
+        box-shadow: 5px 10px 30px gray;
+      }
+
+
+      .sent{
+        padding: 5px;
+        width: 50vw;
+        justify-content: flex-start;
+        /* height: 500px; */
+        /* right: 0; */
+        /* background-color: aquamarine; */
+        border-radius: 10px;
+
+      }
+
+      .recieved{
+        /* left: 0; */
+        position: relative;
+        justify-content: flex-end;
+        padding: 5px;
+        border-radius: 10px;
       }
 
       .profile p{
@@ -189,6 +214,7 @@
 
       .container{
           position: absolute;
+          display: flex;
           bottom: 0;
           right: 0;
           /* background-color: black; */
