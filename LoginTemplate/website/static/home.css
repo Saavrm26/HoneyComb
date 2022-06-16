@@ -121,20 +121,22 @@
 
       .sent{
         padding: 5px;
-        width: 50vw;
         justify-content: flex-start;
         /* height: 500px; */
         /* right: 0; */
         /* background-color: aquamarine; */
         border-radius: 10px;
+        display: flex;
+        color: aliceblue;
+        justify-content: flex-end;
 
       }
 
       .recieved{
         /* left: 0; */
-        position: relative;
         justify-content: flex-end;
         padding: 5px;
+        color: aliceblue;
         border-radius: 10px;
       }
 
@@ -213,13 +215,12 @@
       }
 
       .container{
-          position: absolute;
-          display: flex;
           bottom: 0;
           right: 0;
           /* background-color: black; */
           width: 83.5vw;
           height: 92.5vh;
+          margin-right: 0;
       }
 
       .wrapper .sidebar ul li a:hover:before,
@@ -233,7 +234,7 @@
       }
 
       .wrapper .section .top_navbar{
-          background: #3E2C41;
+          background: #3a274f;
           height: 50px;
           display: flex;
           justify-content: space-between;
@@ -326,7 +327,7 @@
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #4C3575;
+    background: #5B4B8A;
   }
 
 
@@ -374,4 +375,11 @@
   .fa-paperclip
   {
     color: aliceblue;
+  }
+  #containner
+  {
+    padding: 0px;
+  }
+  #btn-image
+  {
   }

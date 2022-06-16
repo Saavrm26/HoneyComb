@@ -47,7 +47,7 @@
       <div class="sidebar">
         <!--profile image & text-->
         <div class="profile">
-          <img src="{{ url_for('static',filename='HoneyComb.jpg') }}" alt="profilepic" />
+          <img src="{{ url_for('static',filename='logo.jpg') }}" alt="profilepic" />
           <h3 class="prof-name">{{ uname }}</h3>
         </div>
         <!--menu item-->
@@ -154,15 +154,12 @@
           <button id="btn-send" type="submit">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
           </button>
-          <button class="btn-im">
+          <button style="display:inline;width:120px; height:30px;" onclick="document.getElementById('image').click()" id="btn-image"><i class="fa fa-paperclip fa-2x"></i></button>
+          <input type='file' id="image" style="display:none">
         </form>
         <span>
-        <input id="image" type="file">
-        <label for="image">
-          <i class="fa fa-paperclip fa-2x"></i>
         </div>
-        </label>
-      </button>
+
         <!-- <i class="fa fa-times-circle remove"></i> -->
 
     </div>
