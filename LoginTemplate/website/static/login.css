@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@300&display=swap');
 body
 {
   margin:0px;
@@ -471,4 +472,8 @@ body
 
     animation: fadeInUp; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 1.75s; /* don't forget to set a duration! */
+  }
+  .main-head
+  {
+    font-family: 'Lobster','sans-serif';
   }
