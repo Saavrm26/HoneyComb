@@ -345,6 +345,130 @@ document.getElementById("AfterDark").addEventListener("click", function (e) {
     });
 });
 
+document.getElementById("Estrella").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  document.getElementsByClassName("active")[0].classList.remove("active");
+  document.getElementById("Estrella").classList.add("active");
+
+  document.getElementById("messages").remove();
+  document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
+
+  folder = document.getElementsByClassName("active")[0].innerText;
+
+  
+  firebase
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
+
+      if (snap.flag == 0) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><p><span><i><b>${snap.username} : <b></i></span>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
+
+document.getElementById("Eifer").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  document.getElementsByClassName("active")[0].classList.remove("active");
+  document.getElementById("Eifer").classList.add("active");
+
+  document.getElementById("messages").remove();
+  document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
+
+  folder = document.getElementsByClassName("active")[0].innerText;
+
+  
+  firebase
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
+
+      if (snap.flag == 0) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><p><span><i><b>${snap.username} : <b></i></span>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
+
+document.getElementById("Students").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  document.getElementsByClassName("active")[0].classList.remove("active");
+  document.getElementById("Students").classList.add("active");
+
+  document.getElementById("messages").remove();
+  document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
+
+  folder = document.getElementsByClassName("active")[0].innerText;
+
+  
+  firebase
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
+
+      if (snap.flag == 0) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><p><span><i><b>${snap.username} : <b></i></span>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
+
+document.getElementById("Zephyr").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  document.getElementsByClassName("active")[0].classList.remove("active");
+  document.getElementById("Zephyr").classList.add("active");
+
+  document.getElementById("messages").remove();
+  document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
+
+  folder = document.getElementsByClassName("active")[0].innerText;
+
+  
+  firebase
+    .database()
+    .ref(`${folder}`)
+    .on("child_added", function (snapshot) {
+      const snap = snapshot.val();
+
+      if (snap.flag == 0) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span>${snap.message}</li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else if (snap.flag == 1) {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><i><b>${snap.username} : <b></i></span><img src="${snap.url}"></img></li>`;
+        document.getElementById("messages").innerHTML += message;
+      } else {
+        const message = `<li class=${snap.username==username ? "sent" : "recieved"}><p><span><i><b>${snap.username} : <b></i></span>${snap.message} <br> <img src="${snap.url}"></p></li>`;
+        document.getElementById("messages").innerHTML += message;
+      }
+    });
+});
+
 document
   .getElementById("message-form")
   .addEventListener("submit", function (e) {
@@ -646,7 +770,8 @@ document
     }
     document.querySelector("#image").value = null;
   });
-firebase
+
+  firebase
   .database()
   .ref(`${folder}`)
   .on("child_added", function (snapshot) {
