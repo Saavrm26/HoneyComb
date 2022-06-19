@@ -154,6 +154,7 @@
         margin-top: 15px;
         margin-bottom: 15px;
         font-size: 16px;
+        /* vertical-align:bottom; */
       }
 
       .recieved{
@@ -171,7 +172,7 @@
       }
       .sent span,.recieved span{
         font-size:19px;
-        text-decoration:solid;
+        /* text-decoration:solid; */
       }
       .profile p{
           font-family: 'Lobster', cursive;
