@@ -8,7 +8,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Open Sans', sans-serif;
-            
+
       }
       #chat{
         /* background-image: url("oka.jpeg"); */
@@ -21,7 +21,7 @@
         margin: 0;
         background-image: url("bg.jpeg");
         background-size: cover;
-      
+
       }
       #message-form{
 
@@ -93,7 +93,7 @@
 } */
 
 #message-form #btn-send{
-   
+
     border-radius: 7px;
     color: #ffffff;
     background: #514770;
@@ -101,7 +101,7 @@
     text-decoration: none;
     border-radius: 70px;
     margin-right: 10px;
-    
+
   }
   #message-form #btn-send :hover{
     background: #6b3d8c;
@@ -222,12 +222,12 @@
       }
 
       .container{
-          bottom: 0;
-          right: 0;
+          /* bottom: 0;
+          right: 0; */
           /* background-color: black; */
-          width: 83.5vw;
+          /* width: 83.5vw;
           height: 92.5vh;
-          margin-right: 0;
+          margin-right: 0; */
       }
 
       .wrapper .sidebar ul li a:hover:before,
@@ -347,18 +347,18 @@
     position: sticky;
     top: 0;
   }
-  
+
   nav ul {
     display: flex;
     margin: 0;
     padding: 0 100px;
     justify-content: flex-end;
   }
-  
+
   nav ul li {
     list-style: none;
   }
-  
+
   nav ul li a {
     display: block;
     color: #fff;
@@ -368,12 +368,12 @@
     font-weight: bold;
     line-height: 50px; /**  Rarely used! **/
   }
-  
+
   nav ul li a:hover,
   nav ul li a.active {
     background: #f00;
-    
-  } 
+
+  }
   .btn-im
   {
     padding:10px;
