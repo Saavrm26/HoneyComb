@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="./index.css" /> -->
 
-    <title>Document</title>
+    <title>HoneyComb</title>
     <script type="text/javascript">
       function noenter() {
         return !(window.event && window.event.keyCode == 13); }
@@ -27,15 +27,17 @@
   </head>
 
 <body>
+  <div class="first">
+  <div>
   <div class="wrapper">
       <!--Top menu -->
     <div class="section">
       <div class= "cont-flex">
         <div class="top_navbar">
           <div class="hamburger">
-            <a href="#">
+            <!-- <a href="#">
                <i class="fas fa-bars"></i>
-            </a>
+            </a> -->
           </div>
           <h3 id="top">Be Sweet Like Honey</h3>
           <a href="http://127.0.0.1:5000/logout" class="btn-log">
@@ -145,7 +147,8 @@
 
       </div>
     </div>
-
+  </div>
+  <div>
     <div id="containner" class="container">
       <div id="chat">
         <span id="wapisaao"><ul id="messages"></ul></span>
@@ -154,7 +157,7 @@
           <button id="btn-send" type="submit">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
           </button>
-          <button style="display:inline;width:120px; height:30px;" onclick="document.getElementById('image').click()" id="btn-image"><i class="fa fa-paperclip fa-2x"></i></button>
+          <button  onclick="document.getElementById('image').click()" id="btn-image"><i class="fa fa-paperclip fa-2x"></i></button>
           <input type='file' id="image" style="display:none">
         </form>
         <span>
@@ -163,7 +166,8 @@
         <!-- <i class="fa fa-times-circle remove"></i> -->
 
     </div>
-
+    </div>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>

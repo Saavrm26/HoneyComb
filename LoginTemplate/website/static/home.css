@@ -8,26 +8,36 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Open Sans', sans-serif;
+            
       }
       #chat{
-        background-image: url("oka.jpeg");
+        /* background-image: url("oka.jpeg"); */
+      }
+      .first{
+        display: flex;
+        flex-direction: column;
       }
       body{
         margin: 0;
+        background-image: url("bg.jpeg");
+        background-size: cover;
+      
       }
       #message-form{
 
         background-color:rgb(179, 154, 204);
         padding:20px;
-
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 40px;
 
       }
 
       #message-input{
         background-color: aliceblue;
-        width: 100vwpx;
-        height: 30px;
-        margin-left: 200px;
+        width: 300px;
+        height: 40px;
+        margin-right: 10px;
       }
 
 
@@ -90,6 +100,7 @@
     padding: 8px 19px 8px 19px;
     text-decoration: none;
     border-radius: 70px;
+    margin-right: 10px;
     
   }
   #message-form #btn-send :hover{
@@ -142,10 +153,6 @@
 
       .profile p{
           font-family: 'Lobster', cursive;
-      }
-
-      body{
-          background: #f5f6fa;
       }
 
       .wrapper .sidebar{
@@ -382,4 +389,11 @@
   }
   #btn-image
   {
+    width:50px;
+    background-color: #371B58;
+    height: 40px;
+    border-radius: 50%;
+    padding-bottom:7px;
+    padding-top: 4px;
+    font-size: 12px;
   }
