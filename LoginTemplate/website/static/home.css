@@ -120,13 +120,21 @@
       }
       .sent img{
         height: 500px;
-        border: 5px solid black;
         box-shadow: 5px 10px 30px gray;
+        background-color:#514770;
+        border: 5px solid;
+        border-color: #4C3575;
+        margin-top: 15px;
+        margin-bottom: 15px;
       }
       .recieved img{
         height: 500px;
-        border: 5px solid black;
         box-shadow: 5px 10px 30px gray;
+        background-color:#514770;
+        border: 5px solid;
+        border-color: #4C3575;
+        margin-top: 15px;
+        margin-bottom: 15px;
       }
 
 
@@ -140,17 +148,31 @@
         display: flex;
         color: aliceblue;
         justify-content: flex-end;
-
+        background-color:#514770;
+        border: 5px solid;
+        border-color: #4C3575;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-size: 16px;
       }
 
       .recieved{
         /* left: 0; */
+        margin-top: 15px;
+        margin-bottom: 15px;
         justify-content: flex-end;
         padding: 5px;
         color: aliceblue;
+        background-color:#3b0d4f;
+        border: 5px solid;
+        border-color: #4C3575;
         border-radius: 10px;
+        font-size: 17px;
       }
-
+      .sent span,.recieved span{
+        font-size:19px;
+        text-decoration:solid;
+      }
       .profile p{
           font-family: 'Lobster', cursive;
       }
