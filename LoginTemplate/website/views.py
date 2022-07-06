@@ -1,6 +1,5 @@
 from flask import Blueprint, current_app, jsonify, redirect, render_template, request, flash
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import Note
 from . import db
 
 
