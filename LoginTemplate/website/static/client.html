@@ -10,33 +10,36 @@
     <h2>Post your requests here</h2>
     <p>Select the clubs you want to apply for:</p>
     <h3>Cultural:</h3>
-    <input type="radio" id="Afterdark" name="Afterdark" value="Afterdark">
+    <input class="checklist" type="checkbox" id="Afterdark" name="Afterdark" value="Afterdark">
     <label for="Afterdark">Afterdark</label>
-    <input type="radio" id="Crotonia" name="Crotonia" value="Crotonia">
+    <input class="checklist" type="checkbox" id="Crotonia" name="Crotonia" value="Crotonia">
     <label for="Crotonia">Crotonia</label>
-    <input type="radio" id="Goonj" name="Goonj" value="Goonj">
+    <input class="checklist" type="checkbox" id="Goonj" name="Goonj" value="Goonj">
     <label for="Goonj">Goonj</label>
-    <input type="radio" id="Estrella" name="Estrella" value="Estrella">
+    <input class="checklist" type="checkbox" id="Estrella" name="Estrella" value="Estrella">
     <label for="Estrella">Estrella</label>
-    <input type="radio" id="Zephyr" name="Zephyr" value="Zephyr">
+    <input class="checklist" type="checkbox" id="Zephyr" name="Zephyr" value="Zephyr">
     <label for="Zephyr">Zephyr</label>
-    <input type="radio" id="Eifer" name="Eifer" value="Eifer">
+    <input class="checklist" type="checkbox" id="Eifer" name="Eifer" value="Eifer">
     <label for="Eifer">Eifer</label>
 
     <h3>Technical:</h3>
-    <input type="radio" id="Competitive Programming" name="Competitive Programming" value="Competitive Programming">
-    <label for="Competitive Programming">Competitive Programming</label>
-    <input type="radio" id="Machine Learning" name="Machine Learning" value="Machine Learning">
-    <label for="Machine Learning">Machine Learning</label>
-    <input type="radio" id="SoftDev" name="SoftDev" value="SoftDev">
+    <input class="checklist" type="checkbox" id="Competitive Programming" name="CP" value="Competitive Programming">
+    <label for="CP">Competitive Programming</label>
+    <input class="checklist" type="checkbox" id="Machine Learning" name="ML" value="Machine Learning">
+    <label for="ML">Machine Learning</label>
+    <input class="checklist" type="checkbox" id="SoftDev" name="SoftDev" value="SoftDev">
     <label for="SoftDev">SoftDev</label>
-    <input type="radio" id="AppDev" name="AppDev" value="AppDev">
+    <input class="checklist" type="checkbox" id="AppDev" name="AppDev" value="AppDev">
     <label for="AppDev">AppDev</label>
-    <input type="radio" id="UI/UX" name="UI/UX" value="UI/UX">
+    <input class="checklist" type="checkbox" id="UI/UX" name="UI/UX" value="UI/UX">
     <label for="UI/UX">UI/UX</label>
-    <input type="radio" id="InfoSec" name="InfoSec" value="InfoSec">
+    <input class="checklist" type="checkbox" id="InfoSec" name="InfoSec" value="InfoSec">
     <label for="InfoSec">InfoSec</label>
-
+    <p><button id="send">Submit</button></p>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js" ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js" ></script>
+    <script src="./client.js" type='module'></script>
 
 </body>
 </html>

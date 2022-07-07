@@ -1,4 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+import { getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -12,10 +13,10 @@ const firebaseConfig = {
   measurementId: "G-2XNP6083TK",
 };
 
-// Initialize Firebase
+// Initialize Firebase and Firestore
 firebase.initializeApp(firebaseConfig);
-const username = document.getElementsByClassName("prof-name")[0].innerText;
-if(username==='admin'){
+const db = firebase.firestore();
+
 // query selection
 const actionAdd= document.querySelector('#add');
 const actionRemove= document.querySelector('#remove')
@@ -56,7 +57,6 @@ actionRemove.addEventListener('click',()=>{
 
 //sending add request
 approveAddRequest.addEventListener('click',()=>{
-  const timestamp = Date.now();
   firebase
     .database()
     .ref(`${folder}/` + timestamp)
@@ -76,5 +76,5 @@ function fetchAddRequests(){
 
 function fetchRemoveRequests(){
 
-}
+
 }

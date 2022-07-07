@@ -18,6 +18,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
+document.cookie = `username=${username}`;
 if(username==='admin'){
   const temp=document.querySelector('#AdminRequests').href="http://127.0.0.1:5000/static/admin.html";
 }
