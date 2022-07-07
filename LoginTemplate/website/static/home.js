@@ -18,6 +18,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
+if(username==='admin'){
+
+}
 
 var folder = document.getElementsByClassName("active")[0].innerText;
 console.log(folder);
