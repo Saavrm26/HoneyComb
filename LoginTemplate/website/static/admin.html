@@ -8,18 +8,26 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <p>Requests</p>
-    <p>
-        Action:
-        <button id="add">Add</button>
-        <button id="remove">Remove</button>
-    </p>
-    <div id="select-clubs" >
-        hello1
+
+        <p>Requests</p>
+        <p>
+            Action:
+            <button id="add">Add</button>
+            <button id="remove">Remove</button>
+        </p>
+        <div id="select-clubs" >
+            This is select-clubs
+            <button id="approve-add-request">Submit</button>
+        </div>
+        <div id="remove-clubs" class="inactive">
+            This is remove-clubs
+            <button id="approve-remove-request">Submit</button>
+        </div>
     </div>
-    <div id="remove-clubs" class="inactive">
-        hello2
-    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="./requests.js" type="module"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
 if(username==='admin'){
-
+  const temp=document.querySelector('#AdminRequests').href="http://127.0.0.1:5000/static/admin.html";
 }
 
 var folder = document.getElementsByClassName("active")[0].innerText;
@@ -41,7 +41,6 @@ document.getElementById("Alumni").addEventListener("click", function (e) {
     .ref(`${folder}`)
     .on("child_added", function (snapshot) {
       const snap = snapshot.val();
-
       if (snap.flag == 0) {
         const message = `<li class=${snap.username==username ? "sent" : "recieved"}><span><b>${snap.username} : </b></span>${snap.message}</li>`;
         document.getElementById("messages").innerHTML += message;

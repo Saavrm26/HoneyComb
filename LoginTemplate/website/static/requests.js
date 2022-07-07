@@ -13,13 +13,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
+firebase.initializeApp(firebaseConfig);
+const username = document.getElementsByClassName("prof-name")[0].innerText;
+if(username==='admin'){
 // query selection
 const actionAdd= document.querySelector('#add');
 const actionRemove= document.querySelector('#remove')
 const selectClubs= document.querySelector('#select-clubs');
 const removeClubs=document.querySelector('#remove-clubs');
+const approveAddRequest=document.querySelector('#approve-add-request');
+const approveRemoveRequest=document.querySelector('#approve-remove-request');
 let folder='Add';
 
 actionAdd.addEventListener('click',()=>{
@@ -31,6 +34,9 @@ actionAdd.addEventListener('click',()=>{
   //making add active
   selectClubs.classList.remove('inactive');
   removeClubs.classList.add('inactive');
+
+  //fetching add requests
+
 });
 
 actionRemove.addEventListener('click',()=>{
@@ -38,9 +44,37 @@ actionRemove.addEventListener('click',()=>{
 
   // selecting folder
   folder='Remove'
-``
+
   //making remove active
   selectClubs.classList.add('inactive');
   removeClubs.classList.remove('inactive');
+
+  //fetching remove requests
+
 });
 
+
+//sending add request
+approveAddRequest.addEventListener('click',()=>{
+  const timestamp = Date.now();
+  firebase
+    .database()
+    .ref(`${folder}/` + timestamp)
+    .set({
+
+    });
+});
+
+//sending remove request
+approveRemoveRequest.addEventListener('click',()=>{
+
+});
+
+function fetchAddRequests(){
+
+}
+
+function fetchRemoveRequests(){
+
+}
+}
