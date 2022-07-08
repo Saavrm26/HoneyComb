@@ -317,11 +317,11 @@ document.getElementById("Goonj").addEventListener("click", function (e) {
     });
 });
 
-document.getElementById("AfterDark").addEventListener("click", function (e) {
+document.getElementById("Afterdark").addEventListener("click", function (e) {
   e.preventDefault();
 
   document.getElementsByClassName("active")[0].classList.remove("active");
-  document.getElementById("AfterDark").classList.add("active");
+  document.getElementById("Afterdark").classList.add("active");
 
   document.getElementById("messages").remove();
   document.getElementById("wapisaao").innerHTML = "<ul id='messages'></ul>";
