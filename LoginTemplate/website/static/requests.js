@@ -70,7 +70,22 @@ let addFunction = async function(){
       element.parentNode.classList.add('inactive')
       let obj=arr[element.id.substring(3)];
       console.log(obj);
-      
+      db.collection("Final").doc(obj['id']).set({
+        username : obj['username'],
+        clubs : obj['clubs'],
+        state : "approved",
+      })
+      .then(() => {
+          console.log("Document successfully written!");
+          db.collection("Add").doc(obj['id']).delete().then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+      })
+      .catch((error) => {
+          console.error("Error writing document: ", error);
+      });
     });
 
   });
