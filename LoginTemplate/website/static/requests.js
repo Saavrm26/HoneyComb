@@ -23,17 +23,55 @@ const actionAdd= document.querySelector('#add');
 const actionRemove= document.querySelector('#remove')
 const selectClubs= document.querySelector('#select-clubs');
 const removeClubs=document.querySelector('#remove-clubs');
+let approveAddRequestArray=document.querySelectorAll('.approve-add-request');
+let approveRemoveRequestArray=document.querySelector('.approve-remove-request');
 let folder='Add';
 
 //storing requests
 let arr=[];
 
-// fetching initial requests
-fetchAddRequests();
-const approveAddRequestArray=document.querySelectorAll('.approve-add-request');
-console.log(approveAddRequestArray);
-const approveRemoveRequestArray=document.querySelector('.approve-remove-request');
+// functions
+//add
+let fetchAddRequests=async function(){
+  arr=[];
+  let ref= db.collection(`${folder}`)
+  await ref.get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        let obj={
+          'id':doc.id,
+          'username':doc.data().username,
+          'clubs':doc.data().clubs
+        }
+        arr.push(obj);
+        let element= document.createElement('div');
+        element.innerHTML=`<p>Document Id : ${obj['id']}</p>
+                          <p>Username : ${obj['username']}</p>
+                          <p>Club : ${obj['clubs']}</p>
+                          <button class="approve-add-request">Approve</button> <button>Disapprove</button>`
+        document.querySelector('#add-requests').append(element);
+        // console.log(`${doc.id} => ${doc.data()}`);
+    });
+    console.log(arr);
+    approveAddRequestArray=document.querySelectorAll('.approve-add-request');
+    console.log(approveAddRequestArray);
+  });
+}
 
+let addFunction = async function(){
+  await fetchAddRequests();
+  //approving add request
+  console.log(approveAddRequestArray);
+  approveAddRequestArray.forEach(element => {
+    element.addEventListener('click',()=>{
+      console.log('inside add request')
+      element.parentNode.classList.add('inactive')
+      // todo : add approved to id
+    });
+
+  });
+}
+
+addFunction();
 
 //selecting add or remove
 actionAdd.addEventListener('click',()=>{
@@ -63,45 +101,6 @@ actionRemove.addEventListener('click',()=>{
 
   //fetching remove requests
 });
-
-
-//approving add request
-approveAddRequestArray.forEach(element => {
-  element.addEventListener('click',()=>{
-    console.log('inside add request')
-    element.parentNode.classList.add('inactive')
-  });
-
-});
-
-//sending remove request
-// approveRemoveRequestArray.addEventListener('click',()=>{
-
-// });
-
-async function fetchAddRequests(){
-  arr=[];
-  let ref= db.collection(`${folder}`)
-  await ref.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        let obj={
-          'id':doc.id,
-          'username':doc.data().username,
-          'clubs':doc.data().clubs
-        }
-        arr.push(obj);
-        let element= document.createElement('div');
-        element.innerHTML=`<p>Document Id : ${obj['id']}</p>
-                          <p>Username : ${obj['username']}</p>
-                          <p>Club : ${obj['clubs']}</p>
-                          <button class="approve-add-request">Approve</button> <button>Disapprove</button>`
-        document.querySelector('#add-requests').append(element);
-        // console.log(`${doc.id} => ${doc.data()}`);
-    });
-
-    console.log(arr);
-  });
-}
 
 function fetchRemoveRequests(){
   arr=[];
