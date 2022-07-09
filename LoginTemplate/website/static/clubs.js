@@ -1,4 +1,5 @@
 'use strict'
+console.log('inside clubs.js')
 const firebaseConfig = {
   apiKey: "AIzaSyArAd2bmZvSI9DjNA56xFwNivNWm3dTz2M",
   authDomain: "honeycomb-8451f.firebaseapp.com",
@@ -10,19 +11,35 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase and Firestore
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+
+const fireClubs=firebase.initializeApp(firebaseConfig,'Secondary');
+const db2 = fireClubs.firestore();
 
 const username = document.getElementsByClassName("prof-name")[0].innerText;
-let clubs='|news|Students';
 
-function splitVals(){
+
+let fetchDetails = async function(clubs='|news|Students|'){
+    let ref= db2.collection(`Final`)
+    await ref.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        let obj=doc.data();
+        if(obj['username']===username){
+
+          clubs+=obj['clubs'];
+        }
+      });
+    })
+    return clubs;
+}
+let splitVals=async (clubs)=>{
   let arr=[];
+  console.log(clubs)
   let str='';
   for(let i=1;i<clubs.length;i++){
     let chr=clubs.charAt(i);
     if(chr=='|'){
-      arr.push(str);
+      if(str!='')
+        arr.push(str);
       str='';
       continue;
     }
@@ -31,28 +48,18 @@ function splitVals(){
   return arr;
 }
 
-let fetchDetails = async function(){
-    arr=[];
-    let ref= db.collection(`Final`)
-    await ref.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        let obj=doc.data();
-        if(obj['username']===username){
-          clubs+=obj['clubs'];
-        }
-      });
-      console.log(arr);
-      approveAddRequestArray=document.querySelectorAll('.approve-add-request');
-      console.log(approveAddRequestArray);
-    });
-  }
-
-let displayClubs = () =>{
+let displayClubs =async () =>{
   let clubList=document.querySelectorAll('.list-items');
-  let arr=splitVals();
+
+  let clubs=await fetchDetails();
+  let arr=await splitVals(clubs);
+  console.log(arr);
   clubList.forEach(club => {
-    if(!arr.includes(club.name)){
-      club.classList.add('inactive');
+    let parEle = club.parentNode;
+    let naam=parEle.getAttribute('name');
+    console.log(naam);
+    if(!(arr.includes(naam))){
+      parEle.classList.add('inactive');
     }
   });
 }
